@@ -3,26 +3,9 @@ import React, {Component} from "react";
 import './post-list-item.css';
 
 export default class PostListItem extends Component {
-    state = {
-        important: false,
-        like: false
-    }
-
-    onImportant = () => {
-        this.setState(({important}) => ({
-            important: !important
-        }));
-    }
-
-    onLike = () => {
-        this.setState(({like}) => ({
-            like: !like
-        }));
-    }
 
     render () {
-        const {label, onDelete} = this.props;
-        const {important, like} = this.state;
+        const {label, onDelete, onToggleImportant, onToggleLiked, important, like} = this.props;
 
         let classNames = "app-list-item d-flex justify-content-between";
         if (important) {
@@ -35,17 +18,20 @@ export default class PostListItem extends Component {
 
         return (
             <div className={classNames}>
-                <span className="app-list-item-label" onClick={this.onLike}>
+                <span className="app-list-item-label" onClick={onToggleLiked}>
                     {label}
                 </span>
                 <div className="d-flex justify-content-center align-items-center">
-                    <button className="btn-star btn-sm" onClick={this.onImportant}>
+                    <button className="btn-star btn-sm" onClick={onToggleImportant}>
                         {/* <i className="fa fa-star"></i> */}
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-star-fill fa-star" viewBox="0 0 16 16">
                             <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                         </svg>
                     </button>
-                    <button className="btn-trash btn-sm" onClick={onDelete}>
+                    <button 
+                    type="button"
+                    className="btn-trash btn-sm" 
+                    onClick={onDelete}>
                         {/* <i className="bi bi-trash"></i> */}
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash fa-trash" viewBox="0 0 16 16">
                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
